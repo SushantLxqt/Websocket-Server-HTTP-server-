@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C WebSocket Chat</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #181818;
+            color: #eeeeee;
+            font-family: Arial, sans-serif;
+            max-width: 720px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        #status {
+            margin: 12px 0;
+            color: #b8c7dc;
+            font-size: 14px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        #messages {
+            height: 300px;
+            overflow-y: auto;
+            background-color: #222222;
+            border: 1px solid #3a3a3a;
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 16px;
+        }
+
+        #messageInput {
+            flex: 1;
+            min-width: 0;
+            padding: 11px;
+            background-color: #252525;
+            color: #ffffff;
+            border: 1px solid #444444;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        #messageInput:focus {
+            border-color: #4c8bf5;
+        }
+
+        button {
+            padding: 10px 14px;
+            background-color: #3478db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #2865bd;
+        }
+
+        .controls button:first-child {
+            background-color: #333333;
+        }
+
+        .controls button:first-child:hover {
+            background-color: #444444;
+        }
+
+        button:disabled,
+        input:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                margin-top: 24px;
+            }
+
+            .controls {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>WebSocket Chat</h1>
+    <div id="status">Disconnected</div>
+
+    <div class="controls">
+        <button type="button" onclick="connect()">Connect</button>
+        <button type="button" onclick="clearMessage()">Clear messages</button>
+    </div>
+
+    <div id="messages" aria-live="polite"></div>
+
+    <div class="controls">
+        <input
+            id="messageInput"
+            type="text"
+            placeholder="Wait for both clients to connect..."
+            disabled
+        >
+        <button id="sendButton" type="button" onclick="sendMessage()" disabled>
+            Send
+        </button>
+    </div>
+
+    <script src="client.js"></script>
+</body>
+</html>
