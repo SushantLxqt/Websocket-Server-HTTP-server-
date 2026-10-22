@@ -1,3 +1,4 @@
+//Again its basic websocket code, you can find it online
 let socket = null;
 let myRole = null;
 let bothClientsReady = false;
